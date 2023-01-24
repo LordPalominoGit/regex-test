@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pictures;
 use App\Models\Images;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use Illuminate\Support\Facades\Auth;
 
-class ImagesController extends Controller
+class PicturesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +16,15 @@ class ImagesController extends Controller
      */
     public function index()
     {
-        //$images = Images::all();
+        //
+        $pictures = Images::all();
         return Inertia::render(
-            'Images/UploadImage'
+            'Pictures/Index',
+            [
+                'pictures' => $pictures
+            ]
         );
+
     }
 
     /**
@@ -27,12 +32,9 @@ class ImagesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
         //
-        
-
-
     }
 
     /**
@@ -41,30 +43,18 @@ class ImagesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request , Images $image)
+    public function store(Request $request)
     {
-        $userId = Auth::id();
-        $path=null;
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('uploads', 'public');
-        }
-
-        $image->title       = $request->title;
-        $image->description = $request->description;
-        $image->userId      = $userId;
-        $image->filePath    = 'storage/'.$path;
-        $image->save();
-
-        return redirect()->route('dashboard')->with('message', 'Image Uploaded Succesfully');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Images  $images
+     * @param  \App\Models\Pictures  $pictures
      * @return \Illuminate\Http\Response
      */
-    public function show(Images $images)
+    public function show(Pictures $pictures)
     {
         //
     }
@@ -72,10 +62,10 @@ class ImagesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Images  $images
+     * @param  \App\Models\Pictures  $pictures
      * @return \Illuminate\Http\Response
      */
-    public function edit(Images $images)
+    public function edit(Pictures $pictures)
     {
         //
     }
@@ -84,10 +74,10 @@ class ImagesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Images  $images
+     * @param  \App\Models\Pictures  $pictures
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Images $images)
+    public function update(Request $request, Pictures $pictures)
     {
         //
     }
@@ -95,10 +85,10 @@ class ImagesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Images  $images
+     * @param  \App\Models\Pictures  $pictures
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Images $images)
+    public function destroy(Pictures $pictures)
     {
         //
     }

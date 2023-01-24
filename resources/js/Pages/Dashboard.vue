@@ -2,13 +2,16 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/inertia-vue3';
 
-const data = ({
-    Cards: ['1','2','3','3','3','3','3'],
-});
+
+const props = defineProps({
+        pictures: {
+            type: Object,
+            default: () => ({}),
+        },
+    });
 </script>
 
 <template>
-    <Head title="Dashboard" />
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center">IMAGE MODERATION</h2>
@@ -16,12 +19,12 @@ const data = ({
 
         <template #body>
                 <div class="grid grid-cols-6 gap-4 p-2">
-                    <div class="max-w-sm overflow-hidden shadow-lg" v-for="card in data.Cards">
-                        <img class="w-full" src="storage/uploads/C5eU5ycdp4WMLojJtmFzWN9HF0M5eFPyoBWazn3D.jpg" >
+                    <div class="max-w-sm overflow-hidden shadow-lg" v-for="picture in pictures">
+                        <img class="w-full" :src="picture.filePath" >
                         <div class="px-6 py-4">
-                            <div class="font-bold text-xl mb-2">lorem ipsum</div>
+                            <div class="font-bold text-xl mb-2">{{picture.title}}</div>
                             <p class="text-gray-700 text-base">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, 
+                                {{picture.description}}
                             </p>
                         </div>
                         <div class="px-6 pt-4 pb-2">
@@ -30,7 +33,5 @@ const data = ({
                     </div>
                 </div>
         </template>
-
-       
     </AuthenticatedLayout>
 </template>
