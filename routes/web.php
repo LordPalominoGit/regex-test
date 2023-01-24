@@ -5,6 +5,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\LandingController;
 
 /*
@@ -19,6 +20,8 @@ use App\Http\Controllers\LandingController;
 */
 
 Route::resource('books', BookController::class);
+
+Route::resource('images', ImagesController::class);
 
 Route::resource('landing', LandingController::class);
 
